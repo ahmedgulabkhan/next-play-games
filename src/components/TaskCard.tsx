@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Task, TeamMember } from '../types';
+import type { Task } from '../types';
 import { PencilIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 
@@ -20,14 +20,14 @@ const priorityColors = {
   high: 'bg-red-50 text-red-700 border-red-200',
 };
 
-const labelColors = [
-  'bg-blue-100 text-blue-700 border-blue-200',
-  'bg-green-100 text-green-700 border-green-200',
-  'bg-yellow-100 text-yellow-700 border-yellow-200',
-  'bg-purple-100 text-purple-700 border-purple-200',
-  'bg-pink-100 text-pink-700 border-pink-200',
-  'bg-indigo-100 text-indigo-700 border-indigo-200',
-];
+// const labelColors = [
+//   'bg-blue-100 text-blue-700 border-blue-200',
+//   'bg-green-100 text-green-700 border-green-200',
+//   'bg-yellow-100 text-yellow-700 border-yellow-200',
+//   'bg-purple-100 text-purple-700 border-purple-200',
+//   'bg-pink-100 text-pink-700 border-pink-200',
+//   'bg-indigo-100 text-indigo-700 border-indigo-200',
+// ];
 
 const priorityLabels = {
   low: 'Low',
@@ -35,7 +35,7 @@ const priorityLabels = {
   high: 'High',
 };
 
-export const TaskCard: React.FC<TaskCardProps> = ({ task, isDragging, onEdit, onViewDetails, availableLabels, availableTeamMembers, isEditOpen, onEditClose }) => {
+export const TaskCard: React.FC<TaskCardProps> = ({ task, isDragging, onEdit, onViewDetails, availableLabels, availableTeamMembers }) => {
   // Function to get label color by name
   const getLabelColor = (labelName: string) => {
     const label = availableLabels?.find(l => l.name === labelName);
@@ -60,7 +60,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, isDragging, onEdit, on
         
         // Only prevent details popup if clicking directly on a button
         if (!isButton) {
-          console.log('Opening task details for:', task.title);
           onViewDetails?.(task);
         }
       }}

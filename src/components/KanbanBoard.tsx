@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { DndContext, closestCorners, PointerSensor, useSensor, useSensors, KeyboardSensor, DragOverlay } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import type { Task, Column, Label, TeamMember } from '../types';
 import { TaskCard } from './TaskCard';
 import { TaskEditPopup } from './TaskEditPopup';
 import { TaskAddPopup } from './TaskAddPopup';
 import { KanbanColumn } from './KanbanColumn';
-import { SortableTaskCard } from './SortableTaskCard';
 import { taskService } from '../services/taskService';
 import { labelService } from '../services/labelService';
 import { teamMemberService } from '../services/teamMemberService';
@@ -47,7 +46,7 @@ const initialColumns: Column[] = [
 ];
 
 export const KanbanBoard: React.FC = () => {
-  const { user, userId, isLoading: sessionLoading } = useGuestSession();
+  const { userId, isLoading: sessionLoading } = useGuestSession();
   const [columns] = useState<Column[]>(initialColumns);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -208,13 +207,11 @@ export const KanbanBoard: React.FC = () => {
     setIsEditPopupOpen(false);
   };
   const handleAddTaskClick = (columnId: string) => {
-    console.log('=== HANDLE ADD TASK CLICK ===', columnId);
     setAddTaskColumnId(columnId);
     setIsAddPopupOpen(true);
   };
 
   const handleAddTaskSubmit = async (taskData: { title: string; description?: string; priority: 'low' | 'normal' | 'high'; due_date?: string; labels?: string[]; assignees?: string[] }) => {
-    console.log('=== ADD TASK SUBMIT ===', { userId, addTaskColumnId, taskData });
     if (!userId || !addTaskColumnId) return;
 
     try {
@@ -241,7 +238,6 @@ export const KanbanBoard: React.FC = () => {
   };
 
   const handleTaskDetails = (task: Task) => {
-    console.log('handleTaskDetails called with:', task);
     setDetailsTask(task);
     setIsDetailsPopupOpen(true);
   };
@@ -493,15 +489,17 @@ export const KanbanBoard: React.FC = () => {
           </DragOverlay>
         </DndContext>
         
-        <TaskEditPopup
-          task={editingTask}
-          isOpen={isEditPopupOpen}
-          onClose={handleEditClose}
-          onUpdate={handleTaskUpdate}
-          onDelete={handleTaskDelete}
-          availableLabels={labels}
-          availableTeamMembers={teamMembers}
-        />
+        {editingTask && (
+          <TaskEditPopup
+            task={editingTask}
+            isOpen={isEditPopupOpen}
+            onClose={handleEditClose}
+            onUpdate={handleTaskUpdate}
+            onDelete={handleTaskDelete}
+            availableLabels={labels}
+            availableTeamMembers={teamMembers}
+          />
+        )}
         
         <TaskAddPopup
           isOpen={isAddPopupOpen}

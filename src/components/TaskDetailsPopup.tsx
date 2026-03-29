@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { XMarkIcon, CalendarIcon, UserCircleIcon, FlagIcon, TagIcon, ClockIcon, ChatBubbleLeftRightIcon, PlusIcon } from '@heroicons/react/24/outline';
-import type { Task, TaskActivity, TaskComment, Label, TeamMember } from '../types';
+import type { Task, TaskActivity, TaskComment } from '../types';
 import { taskActivityService } from '../services/taskActivityService';
 import { taskCommentService } from '../services/taskCommentService';
 import clsx from 'clsx';

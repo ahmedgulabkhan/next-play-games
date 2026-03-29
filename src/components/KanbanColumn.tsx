@@ -55,7 +55,6 @@ export const KanbanColumn: React.FC<KanbanColumnProps> = ({
         </div>
         <button
           onClick={() => {
-            console.log('=== ADD TASK BUTTON CLICKED ===');
             onAddTaskClick?.(column.id);
           }}
           className="text-gray-400 hover:text-gray-600 transition-colors p-2"

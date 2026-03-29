@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { XMarkIcon, CalendarIcon } from '@heroicons/react/24/outline';
-import type { Task, Label, TeamMember } from '../types';
-import { taskService } from '../services/taskService';
+import type { Label, TeamMember } from '../types';
 import clsx from 'clsx';
 
 interface TaskAddPopupProps {
@@ -17,7 +16,6 @@ export const TaskAddPopup: React.FC<TaskAddPopupProps> = ({
   isOpen,
   onClose,
   onSubmit,
-  columnId,
   availableLabels,
   availableTeamMembers,
 }) => {

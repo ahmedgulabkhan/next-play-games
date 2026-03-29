@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { XMarkIcon, PencilIcon, TrashIcon, CalendarIcon, FlagIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, TrashIcon, CalendarIcon } from '@heroicons/react/24/outline';
 import type { Task, TaskUpdateInput, Label, TeamMember } from '../types';
 import { taskService } from '../services/taskService';
 import clsx from 'clsx';
